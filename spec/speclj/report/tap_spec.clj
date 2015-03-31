@@ -21,4 +21,15 @@
               (let [description (generate-description-with-x-charcteristics 5)]
                 (should= "1..5\n" 
                          (with-out-str 
+                           (.report-description @reporter description)))))
+          
+          (it "Prints 1..0 as tap description. Library we use always starts from 1"
+              (let [description (generate-description-with-x-charcteristics 0)]
+                (should= "1..0\n"
+                         (with-out-str
+                           (.report-description @reporter description)))))
+          (it "Prints 1..1000 as tap description"
+              (let [description (generate-description-with-x-charcteristics 1000)]
+                (should= "1..1000\n"
+                         (with-out-str
                            (.report-description @reporter description))))))
