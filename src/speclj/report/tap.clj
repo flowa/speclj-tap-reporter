@@ -1,12 +1,15 @@
 (ns speclj.report.tap
   (:require [speclj.reporting]
-            [clojure.test.tap :as tap]))
+            [clojure.java.io :as io]))
 
 (def tests-total (atom 0))
 
+(def lines (atom []))
+
+(def tap-result-file "./target/tap-result.tap")
+
 (defn- log [stuff]
-  (print stuff)
-  (flush))
+  (swap! lines conj stuff))
 
 (defn- get-name-from-result [result]
   (.name (.characteristic result)))
@@ -23,15 +26,17 @@
     (swap! tests-total #(+ % tests-in-current-plan))))
   (report-pass [this result]
     (let [msg (get-name-from-result result)]
-      (tap/print-tap-pass msg)))
+      (log (str "ok " msg))))
   (report-pending [this pending])
   (report-fail [this fail]
     (let [msg (get-name-from-result fail)]
-      (tap/print-tap-fail msg)))
+      (log (str "not ok " msg))))
   (report-runs [this runs]
-    (tap/print-tap-plan @tests-total)
-    (reset! tests-total 0))
+    (log (str "1.." @tests-total)))
   (report-error [this error]))
 
+(defn reset []
+    (reset! tests-total 0)
+    (reset! lines []) )
 (defn new-tap-reporter []
   (TapReporter. 0 0 0))
