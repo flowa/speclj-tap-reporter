@@ -26,6 +26,8 @@
   (.report-runs reporter "")
   (should= result (get-last-line)))
 
+
+
 (describe "Tap Reporter tests"
 
           (with reporter (tap/new-tap-reporter))
@@ -35,7 +37,8 @@
 
                       (around [it]
                               (with-redefs [tap/write-to-file (fn [foo] nil)
-                                            tap/lines (atom [])] (it)))
+                                            tap/lines (atom [])
+                                            tap/tests-total (atom 0)] (it)))
 
                       (it "Prints 1..5 as tap description"
                           (let [description (generate-description-with-x-charcteristics 5)]
