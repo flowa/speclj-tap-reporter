@@ -1,5 +1,29 @@
-# speclj-tap-runner
+# speclj-tap-reporter
 
-This will be an implementation of TAP-format reporter for speclj.
-There's already a tap add on to clojure test, so it's possible to just forward
-stuff to that. 
+A Plugin for spelcj. Reports test in
+[TAP](http://testanything.org/) format. Useful in
+Continuous integration systems for example.
+
+## Installation
+
+Add the following to your project.clj under the :dev profile:
+
+    :dependencies [[speclj-junit "0.0.1-SNAPSHOT"]]
+
+Speclj 3.2.0 or later is required.
+
+## Usage.
+
+    lein spec -f tap
+
+Test results are recorded to target/tap-result.tap file.
+
+## TODO
+
+* Directives support 
+
+## License
+
+Copyright (C) 2015 Flowa
+
+Distributed under the The MIT License.
