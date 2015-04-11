@@ -8,7 +8,7 @@ Continuous integration systems for example.
 
 Add the following to your project.clj under the :dev profile:
 
-    :dependencies [[speclj-tap-reporter "0.1.1"]]
+    :dependencies [[speclj-tap-reporter "0.1.2-SNAPSHOT"]]
 
 Speclj 3.2.0 or later is required.
 
