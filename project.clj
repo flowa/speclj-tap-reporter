@@ -1,4 +1,4 @@
-(defproject speclj-tap-reporter "0.0.1-SNAPSHOT"
+(defproject speclj-tap-reporter "0.1.1"
   :description "A tap reporter for excellent speclj testing library"
   :url "https://github.com/flowa/speclj-tap-reporter"
   :license {:name "MIT License"
@@ -10,6 +10,6 @@
 
   :dependencies [[org.clojure/clojure "1.6.0"]]
   :profiles {:dev {:dependencies [[speclj "3.2.0"]
-                                  [speclj-tap-reporter "0.0.1-SNAPSHOT"]]}}
+                                  [speclj-tap-reporter "0.1.1"]]}}
   :plugins [[speclj "3.2.0"]]
   :test-paths ["spec"])
