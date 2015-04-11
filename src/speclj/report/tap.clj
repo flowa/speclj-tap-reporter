@@ -13,7 +13,7 @@
   (with-open [writer (io/writer tap-result-file)]
     (doseq [line @lines] (.write writer (str line "\n")))))
 
-(defn- write-line-to-report [stuff]
+(defn- write-line-to-report! [stuff]
   (swap! lines conj stuff))
 
 (defn- get-name-from-result [result]
@@ -31,13 +31,13 @@
       (swap! tests-total #(+ % tests-in-current-plan))))
   (report-pass [this result]
     (let [msg (get-name-from-result result)]
-      (write-line-to-report (str "ok " msg))))
+      (write-line-to-report! (str "ok " msg))))
   (report-pending [this pending])
   (report-fail [this fail]
     (let [msg (get-name-from-result fail)]
-      (write-line-to-report (str "not ok " msg))))
+      (write-line-to-report! (str "not ok " msg))))
   (report-runs [this results]
-    (write-line-to-report (str "1.." @tests-total))
+    (write-line-to-report! (str "1.." @tests-total))
     (write-to-file @lines))
   (report-error [this error]))
 
